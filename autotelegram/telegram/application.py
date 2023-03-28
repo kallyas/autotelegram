@@ -1,6 +1,7 @@
 
 import asyncio
 from starlette.requests import Request
+from starlette.responses import PlainTextResponse
 from autotelegram.telegram.context import Context
 
 __all__ = ("BaseApp","PollingApp","WebhookApp")
@@ -144,3 +145,6 @@ class WebhookApp (BaseApp):
                 raise exp
             else:
                 handler(exp)
+
+        response = PlainTextResponse("")
+        await response(scope,recv,send)
